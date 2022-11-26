@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h1>@ViewData["Title"]</h1>
+<p>Важные замечания: </p>
+<ul> 
+    <li>Группа выбирается в выпадающем меню.</li>
+    <li>Фильтр по фамилии регистрозависим.</li>
+    <li>Для проведения поика необходимо нажать <code>Filter</code>.</li>
+    <li>Параметры подключения к базе данных MySQL задаются в файле <code>appsettings.json</code>.</li>
+    <li>Строка подключения по-умолчанию:  <code>Server=10.7.0.5;Port=3306;UserID=root;Password=oracle;Database=students</code></li>
+    <li>В случае дублирования первичного ключа при добавлении создается сообщение об ошибке.</li>.
+</ul>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

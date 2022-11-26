@@ -1,0 +1,74 @@
+﻿@*@model IEnumerable<WebDB.Models.Student>*@
+@model WebDB.Models.StudentsView
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (ViewData["errors"].Equals(""))
+{
+    @:<p>Everything is fine.</p>
+}
+else
+{
+    @:<script>alert('@ViewData["errors"]');</script>
+}
+
+<h1>Student list</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Students" asp-action="Index" method="get">
+    <p>
+        Groups:
+        <select asp-for="StudentsGroups" asp-items="Model.Groups">
+            <option value="">All</option>
+        </select>
+
+        LastName: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students[0].Group)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Students)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
