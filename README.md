@@ -2,7 +2,7 @@
 ## WebStudents
 ASP.NET приложение, позволяет создавать/удалять студентов и искать их по группе и по фамилии в базе данных students.
 
-В корне решения: 
+В корне решения (не проекта!): 
 
 `docker build -t web-stud -f WebStudents\Dockerfile .`
 ## DB 
