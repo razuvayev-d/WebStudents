@@ -119,7 +119,7 @@ namespace WebDB.Controllers
             {
                 return NotFound();
             }
-            
+
             var candidate = students.FirstOrDefault(x => x.Id == id);
             if (candidate == null) return NotFound();
             return View(candidate);
@@ -141,7 +141,7 @@ namespace WebDB.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ViewData["errors"] = e.Message.Replace("'", "");
 
