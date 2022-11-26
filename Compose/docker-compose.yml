@@ -1,0 +1,42 @@
+# Use root/example as user/password credentials
+
+version: '3.1'
+
+services:
+  db:
+    image: mysqldb
+    restart: always
+    ports:
+      - 3306:3306
+    networks:
+      webstud:
+        ipv4_address: 10.7.0.5
+
+    environment:
+      MYSQL_ROOT_PASSWORD: oracle
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      webstud:
+        ipv4_address: 10.7.0.4
+        
+  webst:
+    image: web-stud
+    restart: always
+    ports:
+      - 49156:80
+    networks:
+      webstud:
+        ipv4_address: 10.7.0.6
+      
+networks:
+  webstud:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.7.0.0/16
+          gateway: 10.7.0.1
