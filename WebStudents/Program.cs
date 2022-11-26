@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Diagnostics;
 using MySql.Data.MySqlClient;
+using System.Net;
 using WebDB.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,18 +15,23 @@ builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+app.UseExceptionHandler(errorApp =>
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        //context.Response.ContentType = "text/html";
+        context.Response.ContentType = "text/plain; charset=utf-8";
+        await context.Response.WriteAsync("Ой...\r\n");
+        await context.Response.WriteAsync("Что-то пошло не так...\r\n");
+        await context.Response.WriteAsync("Код ошибки: " + (int)HttpStatusCode.InternalServerError);
+    });
+});
+app.UseHsts();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseStatusCodePages();
 app.UseRouting();
 
 //app.UseAuthorization();

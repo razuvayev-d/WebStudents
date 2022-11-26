@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MySql.Data.MySqlClient;
 //using MySqlConnector;
 using WebDB.Models;
+using WebStudents.Models;
 
 namespace WebDB.Controllers
 {
@@ -74,7 +75,7 @@ namespace WebDB.Controllers
             catch (Exception e)
             {
                 ViewData["errors"] = e.Message.Replace("'", "");
-                return View(new StudentsView());
+                return View(new ErrorViewModel());
             }
         }
 
